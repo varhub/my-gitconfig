@@ -1,5 +1,5 @@
 [user]
-	name = varribas
+	name = Victor Arribas
 	email = v.arribas.urjc@gmail.com
 
 [alias]
@@ -7,3 +7,5 @@ treegraph = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%
 
 [merge]
 	ff = true
+[push]
+	default = simple

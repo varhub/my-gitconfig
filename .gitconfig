@@ -12,3 +12,5 @@ log4filestamp = log --graph --full-history --all --no-color --pretty=tformat:"%h
 	ff = true
 [push]
 	default = simple
+[core]
+	excludesfile = ~/.gitignore_global

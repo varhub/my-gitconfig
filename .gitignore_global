@@ -1,0 +1,12 @@
+## This file should contain rules for  **auxiliary** Tools, 
+# Editors and IDE'S used *out of the box*. So it use does not 
+# affect to repository.
+# Unless you won't provide any or a useful gitignore file.
+## thanks to <https://help.github.com/articles/ignoring-files/#create-a-global-gitignore>
+
+
+# Editor (gedit, emacs, vim)
+*~
+
+# My git log dump
+GIT_LOG.TXT

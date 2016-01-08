@@ -31,3 +31,18 @@ link_file $name $force_install
 name=.gitignore_global
 link_file $name $force_install
 git config --global core.excludesfile \~/$name
+
+# add git extensions to PATH
+declare_path(){
+	echo ""
+	echo ""
+	echo "# git-extensions (my-gitconfig)"
+	echo "export PATH=$(pwd)/bin:\$PATH"
+}
+if test -e $HOME/.profile; then
+	grep -q 'my-gitconfig' $HOME/.profile || (declare_path >> $HOME/.profile)
+elif test -e $HOME/.bashrc; then
+	grep -q 'my-gitconfig' $HOME/.bashrc || (declare_path >> $HOME/.bashrc)
+else
+	echo "git-extensions could not be installed">&2
+fi

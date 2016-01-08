@@ -8,5 +8,11 @@
 # Editor (gedit, emacs, vim)
 *~
 
+# Editor (qtcreator)
+*.autosave
+
+# pyCharm
+.idea/
+
 # My git log dump
 GIT_LOG.TXT

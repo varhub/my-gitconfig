@@ -4,14 +4,16 @@
 
 [alias]
 	root = rev-parse --show-toplevel
+
 	treegraph = log --graph --full-history --all --color --pretty=tformat:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m"
+	logmerges = log --graph --merges --first-parent --color --pretty=tformat:"%x1b[31m%h%x09%x1b[0m%ad%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m" --date=short
+
 	log4file = log --graph --full-history --all --no-color --pretty=tformat:"%h%x09%d%x20%s"
 	log4filestamp = log --graph --full-history --all --no-color --pretty=tformat:"%h%x09%ad%x09%d%x20%s" --date=short
-#	logmerges = log --graph --full-history --merges --color --pretty=tformat:"%x1b[31m%h%x09%x1b[0m%ad%x09%x1b[32m%d%x1b[0m%x20%s%x20%x1b[33m(%an)%x1b[0m" --date=short #| grep '^\*'
 
 [core]
 	excludesfile = ~/.gitignore_global
 [push]
 	default = current
 [merge]
-#	ff = true
+#	ff = false

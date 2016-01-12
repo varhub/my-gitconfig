@@ -1,4 +1,22 @@
 #!/bin/sh
+#
+# Copyright (c) 2015
+# Author: Victor Arribas <v.arribas.urjc@gmail.com>
+# License: GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>
+#
+# Usage: ./install.sh [-f] [-bin]
+
+
+for arg in "$@"; do
+case $arg in
+	'-f')
+		force_install=$arg
+	;;
+	'-bin')
+		install_bin=$arg
+	;;
+esac
+done
 
 
 link_file(){
@@ -21,7 +39,6 @@ if [ $? -eq 0 ]; then
 fi
 }
 
-force_install=$1
 
 # install gitconfig
 name=.gitconfig
@@ -32,7 +49,11 @@ name=.gitignore_global
 link_file $name $force_install
 git config --global core.excludesfile \~/$name
 
-# add git extensions to PATH
+
+# add git extensions
+if test -n "$install_bin"; then
+echo "installing git-extensions (PATH injection)"
+
 declare_path(){
 	echo ""
 	echo ""
@@ -46,3 +67,5 @@ elif test -e $HOME/.bashrc; then
 else
 	echo "git-extensions could not be installed">&2
 fi
+
+fi # install_bin

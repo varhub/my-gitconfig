@@ -27,6 +27,5 @@ Fork
 ----
 To use this git-config you must realize 3 steps:
   1. Fork this repo
-  2. **change** user's name and email
-  3. Push changes into your fork
- 
+  2. **change** user's name and email using github's file editor (pencil icon)
+  3. Clone your own my-gitconfig and install it

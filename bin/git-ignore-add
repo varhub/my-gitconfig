@@ -1,0 +1,55 @@
+#!/bin/sh
+#
+# Copyright (c) 2015-2016
+# Author: Victor Arribas <v.arribas.urjc@gmail.com>
+# License: GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>
+#
+# Usage:
+# git ignore-add C++
+
+set -e
+
+usage(){
+cat<<EOF
+git-ignore-add
+Copyright (c) 2015-2016, Victor Arribas <v.arribas.urjc@gmail.com>
+
+Append complex ignore rules to .gitignore by using GitHub's predefined
+ignore files.
+You can see a list of common ignore files at:
+  https://github.com/github/gitignore
+
+Usage: git ignore-add <template>
+Examples:
+  git ignore-add C++
+  git ignore-add Global/Eclipse
+
+EOF
+}
+
+GitHub_Database=https://raw.githubusercontent.com/github/gitignore/master
+
+get_from_internet(){
+	if wget -q --spider $1; then
+	        echo "# $1"
+	        wget -q -O- $1
+	        echo
+	        echo
+	else
+		echo "Error: Requested file do not exists (file=$1)">&2
+		exit 1
+	fi
+}
+
+main(){
+	if [ -z "$1" ] || [ "--help" = "$1" ]; then
+		usage
+		exit 1
+	fi
+
+	filename=${GitHub_Database}/${1}.gitignore
+	get_from_internet "$filename" >> .gitignore
+}
+
+
+main $@

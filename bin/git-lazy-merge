@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# Copyright (c) 2016
+# Author: Victor Arribas <v.arribas.urjc@gmail.com>
+# License: GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>
+#
+# Usage: git-lazy-merge <base> <branch-name>
+
+set -e
+set -u
+
+base_id=$1
+base_name=$(git rev-parse --abbrev-ref HEAD)
+feature_name=$2
+feature_id=$(git rev-parse HEAD)
+
+if test -n "$(git status --short --porcelain)"
+then
+	echo "Error: lazy-merge can only be applied over clean workspace. COmmit changes first." >&2
+	exit 1
+fi
+
+git reset --hard $base_id \
+&& git merge --no-ff --edit --message "Merge branch '$feature_name' into $base_name" $feature_id \
+|| git reset --hard $feature_id # rollback on fail
+
+

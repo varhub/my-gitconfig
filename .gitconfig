@@ -13,7 +13,11 @@
 
 [core]
 	excludesfile = ~/.gitignore_global
+
 [push]
 	default = current
 [merge]
 #	ff = false
+
+[diff]
+       renames = true

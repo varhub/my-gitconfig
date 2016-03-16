@@ -7,6 +7,32 @@
 # Usage: git-lazy-merge <base> <branch-name>
 
 set -e
+
+usage(){
+cat<<EOF
+git-lazy-merge
+Copyright (c) 2016, Victor Arribas <v.arribas.urjc@gmail.com>
+
+Provides feature merge workflow when branch creation was forgotten.
+It does not require to create temporary branches nor other refs.
+Warning: allow merge with untracked files, be careful.
+
+Usage: git lazy-merge <base-id> <branch-name>
+  base-id      - identificator (ref or hash) of where merge must begin.
+                 note: the previous commit to feature begin
+  branch-name  - name of artifical branch when mergin
+                 note: avoid spaces, just use same naming as:
+                 'git branch name' or 'git checkout -b name'
+
+EOF
+}
+
+if [ $# -lt 2 ]
+then
+	usage
+	exit 1
+fi
+
 set -u
 
 base_id=$1
@@ -14,11 +40,12 @@ base_name=$(git rev-parse --abbrev-ref HEAD)
 feature_name=$2
 feature_id=$(git rev-parse HEAD)
 
-if test -n "$(git status --short --porcelain)"
+if test -n "$(git status --short --porcelain --untracked-files=no)"
 then
-	echo "Error: lazy-merge can only be applied over clean workspace. COmmit changes first." >&2
+	echo "Error: lazy-merge can only be applied over clean workspace. Commit changes first." >&2
 	exit 1
 fi
+
 
 git reset --hard $base_id \
 && git merge --no-ff --edit --message "Merge branch '$feature_name' into $base_name" $feature_id \

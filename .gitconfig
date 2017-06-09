@@ -11,6 +11,10 @@
 	log4file = log --graph --full-history --all --no-color --pretty=tformat:"%h%x09%d%x20%s"
 	log4filestamp = log --graph --full-history --all --no-color --pretty=tformat:"%h%x09%ad%x09%d%x20%s" --date=short
 
+	sync = pull --ff-only
+
+	ss = status .
+
 [core]
 	excludesfile = ~/.gitignore_global
 

@@ -1,6 +1,6 @@
 [user]
-	name = Victor Arribas
-	email = v.arribas.urjc@gmail.com
+	name = victorar
+	email = victorar@unlimiteck.com
 
 [alias]
 	root = rev-parse --show-toplevel
@@ -25,3 +25,6 @@
 
 [diff]
        renames = true
+
+[svn]
+	rmdir = true

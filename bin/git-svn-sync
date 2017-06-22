@@ -7,6 +7,11 @@
 # Useful resources:
 # * https://www.atlassian.com/git/tutorials/migrating-convert
 # * http://www.janosgyerik.com/practical-tips-for-using-git-with-large-subversion-repositories/
+#
+# Clone command:
+# $ git svn clone --stdlayout -A authors.txt <svn_url> <local name>
+#   - stdlayout is mandatory (see man for non canonical svn repos)
+#   - authors file must be complete
 
 set -e
 

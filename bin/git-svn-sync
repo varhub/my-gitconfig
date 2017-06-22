@@ -1,0 +1,13 @@
+#!/bin/sh
+#
+# Copyright (c) 2017
+# Author: Victor Arribas <victorar@unlimiteck.com>
+# License: BSD-3-Clause <https://opensource.org/licenses/BSD-3-Clause>
+#
+# Useful resources:
+# * https://www.atlassian.com/git/tutorials/migrating-convert
+# * http://www.janosgyerik.com/practical-tips-for-using-git-with-large-subversion-repositories/
+
+set -e
+
+git stash && git svn rebase && git stash pop

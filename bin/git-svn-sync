@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Copyright (c) 2017
+# Author: Victor Arribas <victorar@unlimiteck.com>
+# License: BSD-3-Clause <https://opensource.org/licenses/BSD-3-Clause>
+#
+# Useful resources:
+# * https://www.atlassian.com/git/tutorials/migrating-convert
+# * http://www.janosgyerik.com/practical-tips-for-using-git-with-large-subversion-repositories/
+# * https://github.com/varhub/git_status
+#
+# Clone command:
+# $ git svn clone --stdlayout -A authors.txt <svn_url> <local name>
+#   - stdlayout is mandatory (see man for non canonical svn repos)
+#   - authors file must be complete
+
+
+test -z "$(git status --short --porcelain)"
+dirty=$?
+
+set -e
+
+if [ $dirty -gt 0 ]; then
+  echo "Found dirty workspace, stashing it..."
+  git stash --all --include-untracked
+fi
+
+git svn rebase
+
+[ $dirty -gt 0 ] && git stash pop
+echo "git SVN sync OK."

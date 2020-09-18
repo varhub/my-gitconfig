@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# Copyright (c) 2020
+# Author: Victor Arribas <v.arribas.urjc@gmail.com>
+# License: GPLv3 <http://www.gnu.org/licenses/gpl-3.0.html>
+#
+# Usage:
+# git mirror-branch <branch name> <remote origin> <remote target>
+
+set -e
+set -u
+
+usage(){
+cat<<EOF
+git-mirror-branch
+Copyright (c) 2020, Victor Arribas <v.arribas.urjc@gmail.com>
+
+Push a branch from one remote to another without touch working tree.
+Usage: git mirror-branch <branch name> <remote origin> <remote target>
+
+EOF
+}
+
+if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
+	usage
+	exit 1
+fi
+
+branch=$1
+origin=$2
+target=$3
+git push "$target" "$origin/$branch":"refs/heads/$branch"

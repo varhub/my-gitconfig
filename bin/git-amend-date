@@ -27,7 +27,7 @@ fi
 export GIT_COMMITTER_DATE
 export GIT_AUTHOR_DATE
 
-git commit --amend --allow-empty --date "$GIT_AUTHOR_DATE"
+git commit --amend --allow-empty --no-edit --date "$GIT_AUTHOR_DATE"
 
 unset GIT_COMMITTER_DATE
 unset GIT_AUTHOR_DATE
